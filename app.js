@@ -24,7 +24,15 @@ var Campground 		= require("./models/campground"),
 //seedDB();
 
 //connecting to mongodb and creating database yelp_camp
-mongoose.connect("mongodb://localhost/yelp_camp_v11Deployed", {useNewUrlParser: true});
+// mongoose.connect("mongodb://localhost/yelp_camp_v11Deployed", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://hitengarg45:1999%40Hiten@cluster0-tcfir.mongodb.net/yelp_camp_v11Deployed?retryWrites=true&w=majority", {
+	useNewUrlParser: true,
+	useCreateIndex: true
+}).then(() => {
+	console.log("Connected to DB!");
+}).catch(err => {
+	console.log("error", err.message);
+});
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
@@ -64,7 +72,7 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 //===================================================================================================================================================
 //SERVER STARTING
 //===================================================================================================================================================
-app.listen(process.env.PORT, function(){
+app.listen(3000, function(){
 	console.log("SERVER LISTENING ON PORT=3000");
 	console.log("THE YELPCAMP APP HAS STARTED!");
 });
