@@ -72,7 +72,7 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 //===================================================================================================================================================
 //SERVER STARTING
 //===================================================================================================================================================
-app.listen(3000, function(){
+app.listen(process.env.PORT, function(){
 	console.log("SERVER LISTENING ON PORT=3000");
 	console.log("THE YELPCAMP APP HAS STARTED!");
 });
