@@ -3,10 +3,27 @@ body{
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+	background-position: 50% 50%;
 	padding-top: 70px;
+	font-family: 'Roboto', sans-serif;
+}
+textarea.form-control {
+    height: 100px;
 }
 .navbar {
     border-radius: 0px;
+}
+.forms{
+	width: 30%; 
+	margin: 25px auto;
+	background-color: white;
+	padding: 1.5em;
+	border-radius: 5px;
+}
+.form-head-h1{
+	text-align: center;
+	margin-top: 0;
+	font-size: x-large;
 }
 .thumbnail img{
 	width: 100%;
