@@ -12,7 +12,7 @@ var express 				= require('express'),
 
 //ENVIRONMENT VARIABLES
 var PORT = process.env.PORT || 3000
-
+var DATABASEURL = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v11Deployed"
 //REQUIRING ROUTES
 var campgroundRoutes = require("./routes/campgrounds"),
 	commentRoutes 	 = require("./routes/comments"),
@@ -27,8 +27,9 @@ var Campground 		= require("./models/campground"),
 //seedDB();
 
 //connecting to mongodb and creating database yelp_camp
-// mongoose.connect("mongodb://localhost/yelp_camp_v11Deployed", {useNewUrlParser: true});
-mongoose.connect("mongodb+srv://hitengarg45:1999%40Hiten@cluster0-tcfir.mongodb.net/yelp_camp_v11Deployed?retryWrites=true&w=majority", {
+//mongoose.connect("mongodb://localhost/yelp_camp_v11Deployed", {useNewUrlParser: true});
+//"mongodb+srv://hitengarg45:1999%40Hiten@cluster0-tcfir.mongodb.net/yelp_camp_v11Deployed?retryWrites=true&w=majority"
+mongoose.connect(DATABASEURL, {
 	useNewUrlParser: true,
 	useCreateIndex: true
 }).then(() => {
