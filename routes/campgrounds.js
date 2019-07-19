@@ -19,7 +19,8 @@ router.get("/", function(req, res){
 			//now are getting it from the database as function arg which is also array of objects
 			//but for avoiding confusion changing its arg name from campgrounds -> allCampgrounds
 			res.render("campgrounds/index", {
-				campgrounds: allCampgrounds
+				campgrounds: allCampgrounds,
+				page: 'campgrounds'
 			});
 		}
 	});
