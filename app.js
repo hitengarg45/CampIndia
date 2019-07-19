@@ -10,6 +10,9 @@ var express 				= require('express'),
 	passportLocalMongoose 	= require('passport-local-mongoose'),
 	seedDB					= require('./seeds');
 
+//ENVIRONMENT VARIABLES
+var PORT = process.env.PORT || 3000
+
 //REQUIRING ROUTES
 var campgroundRoutes = require("./routes/campgrounds"),
 	commentRoutes 	 = require("./routes/comments"),
@@ -72,7 +75,7 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 //===================================================================================================================================================
 //SERVER STARTING
 //===================================================================================================================================================
-app.listen(process.env.PORT, function(){
+app.listen(PORT, function(){
 	console.log("SERVER LISTENING ON PORT=3000");
 	console.log("THE YELPCAMP APP HAS STARTED!");
 });
