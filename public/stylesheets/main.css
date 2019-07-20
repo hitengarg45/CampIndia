@@ -43,6 +43,12 @@ textarea.form-control {
 	display: inline;
 }
 
+/* Google Maps */
+#map {
+    height: 400px;
+    width: 100%;
+}
+
 /*MEDIA QUERIES*/
 
 @media screen and (max-width: 426px) {

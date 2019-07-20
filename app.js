@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 //REQUIRING PACKAGES
 var express 				= require('express'),
 	app 					= express(),
