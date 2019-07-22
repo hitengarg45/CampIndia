@@ -103,7 +103,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 //SHOW -> to show contents of paticular campground
 router.get("/:id", function(req, res){
 	//find the campground with provided ID in DB
-	Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
+	Campground.findById(req.params.id).populate("comments likes").exec(function(err, foundCampground){
 		if(err){
 			console.log(err);
 		}
@@ -161,6 +161,38 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res){
 		}
 	});
 });
+
+//LIKES ROUTE
+router.post("/:id/like", middleware.isLoggedIn, function (req, res) {
+    Campground.findById(req.params.id, function (err, foundCampground) {
+        if (err) {
+            console.log(err);
+            return res.redirect("/campgrounds");
+        }
+
+        // check if req.user._id exists in foundCampground.likes
+        var foundUserLike = foundCampground.likes.some(function (like) {
+            return like.equals(req.user._id);
+        });
+
+        if (foundUserLike) {
+            // user already liked, removing like
+            foundCampground.likes.pull(req.user._id);
+        } else {
+            // adding the new user like
+            foundCampground.likes.push(req.user);
+        }
+
+        foundCampground.save(function (err) {
+            if (err) {
+                console.log(err);
+                return res.redirect("/campgrounds");
+            }
+            return res.redirect("/campgrounds/" + foundCampground._id);
+        });
+    });
+});
+
 
 //search function used in Index route
 function escapeRegex(text) {
