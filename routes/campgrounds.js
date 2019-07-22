@@ -20,21 +20,44 @@ var geocoder = NodeGeocoder(options);
 
 //INDEX -> campgrounds route, show all campgrounds
 router.get("/", function(req, res){
-	//get all campgrounds from the DB
-	Campground.find({}, function(err, allCampgrounds){
-		if(err){
-			console.log(err);
-		}
-		else{
-			//can leave it as it is as early there was campground array of objects
-			//now are getting it from the database as function arg which is also array of objects
-			//but for avoiding confusion changing its arg name from campgrounds -> allCampgrounds
-			res.render("campgrounds/index", {
-				campgrounds: allCampgrounds,
-				page: 'campgrounds'
-			});
-		}
-	});
+  var noMatch = null;
+  if(req.query.search){
+     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    //get all campgrounds from the DB
+    Campground.find({name: regex}, function(err, allCampgrounds){
+      if(err){
+        console.log(err);
+      }
+      else{
+        if(allCampgrounds.length < 1){
+          noMatch = "Sorry, No campgrounds found!!";
+        }
+        res.render("campgrounds/index", {
+          campgrounds: allCampgrounds,
+          page: 'campgrounds',
+          noMatch: noMatch
+        });
+      }
+    });
+  }
+  else{
+    //get all campgrounds from the DB
+    Campground.find({}, function(err, allCampgrounds){
+      if(err){
+        console.log(err);
+      }
+      else{
+        //can leave it as it is as early there was campground array of objects
+        //now are getting it from the database as function arg which is also array of objects
+        //but for avoiding confusion changing its arg name from campgrounds -> allCampgrounds
+        res.render("campgrounds/index", {
+          campgrounds: allCampgrounds,
+          page: 'campgrounds',
+          noMatch: noMatch
+        });
+      }
+    });
+  }
 });
 
 
@@ -45,7 +68,6 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 
 
 //CREATE -> add new campground to DB
-//CREATE - add new campground to DB
 router.post("/", middleware.isLoggedIn, function(req, res){
   // get data from form and add to campgrounds array
   var name = req.body.name;
@@ -139,5 +161,10 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res){
 		}
 	});
 });
+
+//search function used in Index route
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports = router;

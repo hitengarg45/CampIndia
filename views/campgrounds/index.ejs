@@ -8,11 +8,24 @@
 	<header class="jumbotron">
 		<div>
 			<h1><span class="glyphicon glyphicon-tent" aria-hidden="true"></span> Welcome To YelpCamp</h1>
-			<p>View our hand-picked campgrounds from all over the world</p>
-			<p><a href="/campgrounds/new" class="btn btn-primary btn-lg">Add New Campground</a></p>
+			<p style="font-size: 20px">View our hand-picked campgrounds from all over the world</p>
+			<p><a href="/campgrounds/new" class="btn btn-primary btn-md">Add New Campground</a></p>
+			<p>
+				<form action="/campgrounds" method="GET" class="form-inline">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Campground's search" name="search">
+						<input type="submit" value="Search" class="btn btn-sm btn-success">
+					</div>
+				</form>
+			</p>
 		</div>
 	</header>
 	<div class="row text-center" style="display: flex; flex-wrap: wrap;">
+		<div class="col-md-12">
+			<% if(noMatch !== null){ %>
+				<h3 style="color: white; font-size: 30px;"><%= noMatch %></h3>
+			<% } %>
+		</div>
 		<% campgrounds.forEach(function(campground){ %>
 			<div class="col-md-3 col-sm-6">
 				<div class="thumbnail">
@@ -28,7 +41,6 @@
 		<% }) %>
 	</div>
 </div>
-
 
 <!-- include footer template -->
 <% include ../partials/footer %>
