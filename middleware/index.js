@@ -14,7 +14,7 @@ var middlewareObj = {
 				else{
 					//does the user own the campground
 					//if yes
-					if(foundCampground.author.id.equals(req.user._id)){
+					if(foundCampground.author.id.equals(req.user._id) || req.user.isAdmin){
 						next();
 					}
 					//if no
@@ -43,7 +43,7 @@ var middlewareObj = {
 				else{
 					//does the user own the comment
 					//if yes
-					if(foundComment.author.id.equals(req.user._id)){
+					if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin){
 						next();
 					}
 					//if no

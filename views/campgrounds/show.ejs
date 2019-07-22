@@ -4,11 +4,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-3">
-			<p class="lead">YelpCamp</p>
+			<p class="lead" style="color: #fff">YelpCamp</p>
 			<div class="list-group">
-				<li class="list-group-item active">Info 1</li>
-				<li class="list-group-item">Info 2</li>
-				<li class="list-group-item">Info 3</li>
+				<li class="list-group-item active">Image Gallary</li>
+				<li class="list-group-item">Book a campground</li>
+				<li class="list-group-item">Contact</li>
 			</div>
 			<div id="map"></div>
 		</div>
@@ -19,8 +19,8 @@
 					<h4 class="pull-right">Rs.<%= campground.price %>/night</h4>
 					<h4><a><%= campground.name %></a></h4>
 					<p><%= campground.description %></p>
-					<p><em>Created By </em><strong><%= campground.author.username %></strong>, <%= moment(campground.createdAt).fromNow() %></p>
-					<% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+					<p><em>Created By </em><a href="/users/<%= campground.author.id %>"><strong><%= campground.author.username %></strong></a>, <%= moment(campground.createdAt).fromNow() %></p>
+					<% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
 						<a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
 						<form class="delete" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
 							<button class="btn btn-xs btn-danger">Delete</button>
@@ -42,7 +42,7 @@
 							<p>
 								<%= comment.text %>	
 							</p>
-							<% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+							<% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
 							<a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit</a>
 							<form class="delete" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
 								<button class="btn btn-xs btn-danger">Delete</button>

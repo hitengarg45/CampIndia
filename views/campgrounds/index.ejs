@@ -2,6 +2,9 @@
 <% include ../partials/header %> 
 
 <div class="container">
+	<% if(currentUser && currentUser.isAdmin){ %>
+		<h1 style="color: #fff">You're an admin!</h1>
+	<% } %>
 	<header class="jumbotron">
 		<div>
 			<h1><span class="glyphicon glyphicon-tent" aria-hidden="true"></span> Welcome To YelpCamp</h1>
