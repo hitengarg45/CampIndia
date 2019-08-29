@@ -81,5 +81,5 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 //===================================================================================================================================================
 app.listen(PORT, function(){
 	console.log("SERVER LISTENING ON PORT=3000");
-	console.log("THE YELPCAMP APP HAS STARTED!");
+	console.log("THE CAMPINDIA APP HAS STARTED!");
 });
