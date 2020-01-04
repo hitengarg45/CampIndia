@@ -15,6 +15,7 @@ var express 				= require('express'),
 //ENVIRONMENT VARIABLES
 var PORT = process.env.PORT || 3000
 var DATABASEURL = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v11Deployed"
+
 //REQUIRING ROUTES
 var campgroundRoutes = require("./routes/campgrounds"),
 	commentRoutes 	 = require("./routes/comments"),
@@ -42,9 +43,14 @@ mongoose.connect(DATABASEURL, {
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
-//using stylesheets
+
+//using stylesheets and js 
 app.use(express.static(__dirname + "/public"));
+
+//using methods other than get and post
 app.use(methodOverride("_method"));
+
+//Some functionalities
 app.use(flash());
 app.locals.moment = require('moment');
 
