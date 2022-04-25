@@ -1,2 +1,4 @@
 .env
-/node_modules
+node_modules/
+node_modules/.bin/mime.cmd
+node_modules/.bin/semver.cmd

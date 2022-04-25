@@ -58,7 +58,7 @@ app.locals.moment = require('moment');
 //PASSPORT CONIGURATION
 //===================================================================================================================================================
 app.use(require("express-session")({
-	secret: "My dream is to marry Tunisha",
+	secret: "Any secret here",
 	resave: false,
 	saveUninitialized: false
 }));
